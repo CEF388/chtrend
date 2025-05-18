@@ -8,7 +8,7 @@ from google import genai
 from pydantic import BaseModel
 
 
-conn=sqlitecloud.connect('sqlitecloud://cwcgjb0ahz.g1.sqlite.cloud:8860/chinook.sqlite?apikey=DaG8uyqMPa9GdxoR7ObMoajHIdfUOrc7B0mF0IrU6Y0')
+conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
 c=conn.cursor()
 
 c.execute("SELECT * FROM haberler ORDER BY trend_id DESC LIMIT 99")
