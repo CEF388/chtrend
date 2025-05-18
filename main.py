@@ -4,9 +4,18 @@ import sqlitecloud
 import sqlite3
 import requests
 from datetime import date
-
 from google import genai
 from pydantic import BaseModel
+from fonksiyonlar import trendgetir
+
+diller=["TR","DE","IT","KR","FR","NL","DK"]
+
+guncelle=st.sidebar.button("Haberleri güncelle")
+
+if guncelle:
+for dil in diler:
+    trendgetir(dil)
+    
 
 
 ara=st.text_input("Haberler içinde arama yap")
