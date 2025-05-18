@@ -4,15 +4,22 @@ import sqlitecloud
 import sqlite3
 import requests
 from datetime import date
+
 from google import genai
 from pydantic import BaseModel
+
+
+ara=st.text_input("Haberler içinde arama yap")
 
 
 conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
 c=conn.cursor()
 
-c.execute("SELECT * FROM haberler ORDER BY trend_id DESC LIMIT 99")
-haberler=c.fetchall()
+if len(ara)>2:
+    c.execute("SELECT * FROM haberler WHERE baslik LIKE '½{ara}½' ORDER BY trend_id DESC LIMIT 99')
+else:
+    c.execute("SELECT * FROM haberler ORDER BY trend_id DESC LIMIT 99")
+    haberler=c.fetchall()
 
 for i in range(0,len(haberler),3):
     col1,col2,col3=st.columns(3)
