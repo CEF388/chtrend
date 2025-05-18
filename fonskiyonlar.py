@@ -8,7 +8,7 @@ from google import genai
 from pydantic import BaseModel
 
 def trendgetir(ulke="TR"):
-    conn=sqlitecloud.connect('sqlitecloud://cwcgjb0ahz.g1.sqlite.cloud:8860/chinook.sqlite?apikey=DaG8uyqMPa9GdxoR7ObMoajHIdfUOrc7B0mF0IrU6Y0')
+    conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
     c=conn.cursor()
 
     c.execute("CREATE TABLE IF NOT EXISTS trendler(isim TEXT,trafik INT,tarih TEXT,dil TEXT,isimtr TEXT)")
@@ -62,7 +62,7 @@ def geminicevir(basliklar):
 
     prompt=str(basliklar)+"--->bu konuları veya haberler başlıklarını türkçeye çevir"
 
-    client = genai.Client(api_key="AIzaSyALuc_PAmFOK34wChTvnq6D3v3uknZtL4A")
+    client = genai.Client(api_key="AIzaSyChn48_h_3LfRCclJsbhBUEJwASguw5ZXs")
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=prompt,
@@ -81,7 +81,7 @@ def geminicevir(basliklar):
 
 
 def trendcevir(limit=15):
-    conn=sqlitecloud.connect('sqlitecloud://cwcgjb0ahz.g1.sqlite.cloud:8860/chinook.sqlite?apikey=DaG8uyqMPa9GdxoR7ObMoajHIdfUOrc7B0mF0IrU6Y0')
+    conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
     c=conn.cursor()
 
     c.execute("SELECT rowid,* FROM trendler WHERE isimtr IS NULL OR isimtr='' ")
@@ -132,7 +132,7 @@ def trendcevir(limit=15):
 
 
 def habercevir(haber_id):
-    conn=sqlitecloud.connect('sqlitecloud://cwcgjb0ahz.g1.sqlite.cloud:8860/chinook.sqlite?apikey=DaG8uyqMPa9GdxoR7ObMoajHIdfUOrc7B0mF0IrU6Y0')
+    conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
 
     c=conn.cursor()
 
@@ -141,7 +141,7 @@ def habercevir(haber_id):
 
     if veri[0]==None:
         import google.generativeai as genai
-        genai.configure(api_key="AIzaSyALuc_PAmFOK34wChTvnq6D3v3uknZtL4A")
+        genai.configure(api_key="AIzaSyChn48_h_3LfRCclJsbhBUEJwASguw5ZXs")
         model = genai.GenerativeModel("gemini-2.0-flash")
         response = model.generate_content(f" {veri[1]} ---> metni türkçeye çevir sadece çeviriyi yaz")
 
@@ -155,7 +155,7 @@ def habercevir(haber_id):
 
 
 def gununozeti(gun=""):
-    conn=sqlitecloud.connect('sqlitecloud://cwcgjb0ahz.g1.sqlite.cloud:8860/chinook.sqlite?apikey=DaG8uyqMPa9GdxoR7ObMoajHIdfUOrc7B0mF0IrU6Y0')
+    conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
 
     c=conn.cursor()
 
@@ -170,7 +170,7 @@ def gununozeti(gun=""):
 
     haberlist=[]
     for i in trendler:
-        conn=sqlitecloud.connect('sqlitecloud://cwcgjb0ahz.g1.sqlite.cloud:8860/chinook.sqlite?apikey=DaG8uyqMPa9GdxoR7ObMoajHIdfUOrc7B0mF0IrU6Y0')
+        conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
 
         c=conn.cursor()
         c.execute("SELECT h.* FROM trendler INNER JOIN haberler h ON h.trend_id=trendler.rowid WHERE trendler.rowid=?",(i[0],))
@@ -181,7 +181,7 @@ def gununozeti(gun=""):
             haberlist.append(x[1])
 
     import google.generativeai as genai
-    genai.configure(api_key="AIzaSyALuc_PAmFOK34wChTvnq6D3v3uknZtL4A")
+    genai.configure(api_key="AIzaSyChn48_h_3LfRCclJsbhBUEJwASguw5ZXs")
     model = genai.GenerativeModel("gemini-2.0-flash")
     response = model.generate_content(f" {str(haberlist)} ---> bu günün haberlerini incele ve bu haberlere ait bir türkçe günün özeti çıkar")
     return response.text
