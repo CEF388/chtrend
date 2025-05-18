@@ -18,16 +18,14 @@ for dil in diler:
     
 
 
-ara=st.text_input("Haberler içinde arama yap")
-
+ara=st.text_input("Haber İçinde Arama Yap")
 
 conn=sqlitecloud.connect('sqlitecloud://cgi896obnk.g5.sqlite.cloud:8860/chinook.sqlite?apikey=6gaa4nSztoaj9w4PCaVOIMgos4bNzOfLQyrHkeLsuho')
 c=conn.cursor()
 
-
 if len(ara)>1:
     c.execute(f"SELECT * FROM haberler WHERE baslik LIKE '%{ara}%' ORDER BY trend_id DESC LIMIT 99 ")
-    
+
 else:
     c.execute("SELECT * FROM haberler ORDER BY trend_id DESC LIMIT 99")
     
